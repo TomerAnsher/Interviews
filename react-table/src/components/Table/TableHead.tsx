@@ -7,6 +7,7 @@ import TableSortLabel from '@mui/material/TableSortLabel'
 import Box from '@mui/material/Box'
 import { visuallyHidden } from '@mui/utils'
 import { cells } from './cells'
+import { OrderType } from '../types/types'
 
 const TableHead = ({
   order = 'asc',
@@ -19,7 +20,7 @@ const TableHead = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   numSelected,
 }: {
-  order?: 'asc' | 'desc'
+  order?: OrderType
   orderBy?: string
   onRequestSort: (event: MouseEvent, property: string) => void
   rowCount: number
@@ -36,7 +37,7 @@ const TableHead = ({
     <MuiTableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox color="primary" />
+          <Checkbox color="primary" onClick={onSelectAllClick}/>
         </TableCell>
 
         {cells.map((headCell) => (

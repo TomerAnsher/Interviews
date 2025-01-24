@@ -12,7 +12,6 @@ import TableToolbar from './TableToolbar'
 import { Row } from '../../db/model'
 import { useSearch } from '../../contexts/SearchContext'
 import { OrderType } from '../types/types'
-import TableSortLabel from '@mui/material/TableSortLabel'
 
 const Table = ({ rows }: { rows: Row[] }) => {
   const { searchValue } = useSearch()
@@ -23,7 +22,7 @@ const Table = ({ rows }: { rows: Row[] }) => {
     (row) =>
       row.name.toLowerCase().includes(searchValue.toLowerCase()) ||
       row.email.toLowerCase().includes(searchValue.toLowerCase())
-  )
+  );
 
   const handleRequestSort = (event: MouseEvent, property: string) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -45,14 +44,15 @@ const Table = ({ rows }: { rows: Row[] }) => {
     )
   }, [filteredRows, order])
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isSelected = (name: string) => false
 
   return (
-    <Box sx={{ width: '100vw', height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Paper sx={{ width: '100%', flex: 1 }}>
+    <Box sx={{ width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2 }}>
         <TableToolbar numSelected={0} />
-        <TableContainer sx={{ maxHeight: 'calc(100vh - 64px)' }}>
-          <MuiTable aria-labelledby="tableTitle" sx={{ minWidth: 650 }}>
+        <TableContainer>
+          <MuiTable>
             <TableHead
               order={order}
               orderBy={orderBy}
@@ -73,14 +73,6 @@ const Table = ({ rows }: { rows: Row[] }) => {
                     tabIndex={-1}
                     key={row.name}
                     selected={isItemSelected}
-                    sx={{
-                      '&:nth-of-type(odd)': {
-                        backgroundColor: '#f9f9f9',
-                      },
-                      '&:hover': {
-                        backgroundColor: '#f1f1f1',
-                      },
-                    }}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox color="primary" />
